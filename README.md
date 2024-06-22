@@ -51,7 +51,7 @@ yarn build
 
 # Слой Данных
 
-## Interface IProduct
+## Interface `IProduct`
 Описывает продукт в каталоге.
 - `id: string` - уникальный идентификатор продукта.
 - `title: string` - название продукта.
@@ -60,41 +60,41 @@ yarn build
 - `price: number` - цена продукта.
 - `image: string` - URL на изображения продукта.
 
-## Interface IBasket
+## Interface `IBasket`
 Описывает корзину.
 - `id: string` - уникальный идентификатор корзины (своя корзина есть у каждого пользователя приложения).
 - `price: number` - базовая стоимость продуктов в корзине.
 - `total: number` - стоимость продукта в корзине с учетом скидок.
 - `items: string[]` - перечень продуктов в корзине.
 
-## Interface IOrderForm
+## Interface `IOrderForm`
 Описывает форму оформления заказа.
 - `email: string` - электронная почта покупателя.
 - `phone: string` - телефонный номер покупателя.
 - `address: string` - адрес доставки.
 - `payment: string` - метод оплаты.
 
-## Interface IOrderAddress
+## Interface `IOrderAddress`
 Описывает адрес заказа.
 - `address: string` - адрес доставки.
 - `payment: string` - метод оплаты.
 
-## Interface IOrderContacts
+## Interface `IOrderContacts`
 Описывает контактные данные заказа.
 - `email: string` - электронный адрес.
 - `phone: string` - номер телефона.
 
-## Interface IOrder extends IOrderAddress, IOrderContacts
+## Interface `IOrder` extends `IOrderAddress`, `IOrderContacts`
 Описывает заказ, расширяет IOrderAddress и IOrderContacts.
 - `items: string[]` - перечень продуктов в заказе.
 - `total: number` - стоимость продуктов в заказе.
 
-## Interface IOrderResult
+## Interface `IOrderResult`
 Описывает результат оформления заказа.
 - `id: string` - уникальный идентификатор заказа.
 - `total: number` - стоимость списанная или к оплате за заказ.
 
-## Class AppState использует Interface IAppState
+## Class `AppState` использует Interface `IAppState`
 Управляет глобальным состоянием приложения.
 - `getBasketItems` - возвращает товары в корзине.
 - `addToBasket` - добавляет товар в корзину.
@@ -116,13 +116,13 @@ yarn build
 
 # Слой Представления
 
-## Class Page<T> использует Interface IPage
+## Class `Page<T>` использует Interface `IPage`
 Реализует отображение главного экрана со списком товаров.
 - `set counter` - устанавливает значение счетчика в корзине.
 - `set catalog` - заменяет содержимое catalog на переданные HTML-элементы.
 - `set locked` - управляет блокировкой страницы.
 
-## Class Modal<T> использует Interface IModal
+## Class `Modal<T>` использует Interface `IModal`
 Реализует управление модальными окнами.
 - `set content` - устанавливает содержимое контентной области модального окна.
 - `open` - открывает модальное окно.
@@ -130,7 +130,7 @@ yarn build
 - `handleEscape` - закрывает модальное окно по нажатию на Esc.
 - `render` - рендер модального окна с данными, открывая его после рендеринга.
 
-## Class Card<T> использует Interface ICard
+## Class `Card<T>` использует Interface `ICard`
 Реализует отображение карточки товара.
 - `set id` - устанавливает уникальный идентификатор для карточки.
 - `get id` - возвращает уникальный идентификатор карточки.
@@ -143,41 +143,41 @@ yarn build
 - `get price` - возвращает стоимость товара.
 - `set category` - устанавливает категорию товара.
 
-## Class Basket<T> использует Interface IBasket
+## Class `Basket<T>` использует Interface `IBasket`
 Реализует отображение карточки товара в корзине покупателя.
 - `set items` - устанавливает товары в корзине.
 - `set total` - устанавливает количество валюты к оплате.
 
-## Class Form<T> использует Interface IFormState
+## Class `Form<T>` использует Interface `IFormState`
 Управляет закрытием и открытием форм и их валидацией.
 - `onInputChange` - вызывает событие при изменении поля формы.
 - `set valid` - включает или отключает кнопку отправки формы.
 - `set errors` - устанавливает текст ошибок в форме.
 - `render` - обновляет визуальное состояние и данные формы.
 
-## Class OrderForm extends Form<T>
+## Class `OrderForm` extends `Form<T>`
 Управляет формой оформления заказа.
 
-## Class ContactForm extends Form<T>
+## Class `ContactForm` extends `Form<T>`
 Управляет формой контактных данных для заказа.
 
-## Class Success использует Interface ISuccess
+## Class `Success` использует Interface `ISuccess`
 Управляет отображением успешным завершением заказа.
 
 # Слой Presenter (Коммуникации)
 
-## Class API
+## Class `API`
 Управляет запросами к удаленному серверу.
 - `get` - выполняет GET запрос по URL.
 - `post` - выполняет POST запрос по URL.
 
-## Class WebLarekAPI extends API, использует Interface IWebLarekAPI
+## Class `WebLarekAPI` extends `API`, использует Interface `IWebLarekAPI`
 Расширяет базовый класс API для работы приложения.
 - `getProductList` - получает список товаров с сервера.
 - `getProductItem` - запрашивает данные об конкретном товаре.
 - `orderProducts` - отправляет информацию о заказе и возвращает результат выполнения заказа.
 
-## Class EventEmitter
+## Class `EventEmitter`
 Управляет событиями в приложении.
 - `on` - подписывается на событие.
 - `emit` - инициирует событие с данными.
