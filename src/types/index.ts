@@ -7,6 +7,10 @@ export interface IProduct {
 	image: string;
 }
 
+export interface ICard extends IProduct {
+	buttonTitle?: string;
+}
+
 export interface IBasket {
 	id: string;
 	price: number;
@@ -41,5 +45,30 @@ export interface IOrder extends IOrderAddress, IOrderContacts {
 
 export interface IOrderResult {
 	id: string;
+	total: number;
+}
+
+export interface IAppState {
+	catalog: IProduct[];
+	basket: string[];
+	order: IOrderForm | null;
+}
+
+export interface IPage {
+	counter: number;
+	catalog: HTMLElement[];
+	locked: boolean;
+}
+
+export interface IModal {
+	content: HTMLElement;
+}
+
+export interface IFormState {
+	valid: boolean;
+	errors: string[];
+}
+
+export interface ISuccess {
 	total: number;
 }
