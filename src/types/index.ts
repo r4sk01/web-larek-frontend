@@ -72,3 +72,9 @@ export interface IFormState {
 export interface ISuccess {
 	total: number;
 }
+
+export interface IWebLarekAPI {
+	getProductList: () => Promise<IProduct[]>;
+	getProductItem: (id: string) => Promise<IProduct>;
+	orderProducts: (order: IOrder) => Promise<IOrderResult>;
+}
