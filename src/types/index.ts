@@ -26,7 +26,17 @@ export interface IOrderForm {
 	buttons: string[];
 }
 
-export type PaymentMethod = 'cash' | 'card';
+export type FormErrors = Partial<Record<keyof IOrder, string>>;
+
+export interface IProductActions {
+	onClick: (event: MouseEvent) => void;
+}
+
+export interface ISuccessActions {
+	onClick: () => void;
+}
+
+// export type PaymentMethod = 'cash' | 'card';
 
 export interface IOrderAddress {
 	address: string;
