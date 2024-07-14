@@ -2,7 +2,7 @@ import { IEvents } from './Events';
 
 // Базовый Класс Модели Данных
 export abstract class Model<T> {
-	protected constructor(data: Partial<T>, protected events: IEvents) {
+	constructor(data: Partial<T>, protected events: IEvents) {
 		Object.assign(this, data);
 	}
 
@@ -13,6 +13,6 @@ export abstract class Model<T> {
 }
 
 // Проверка Является ли Объект Экземпляром Класса
-export const isModel = (obj: unknown): obj is Model<never> => {
+export const isModel = (obj: unknown): obj is Model<any> => {
 	return obj instanceof Model;
 };
