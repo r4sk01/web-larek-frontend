@@ -1,9 +1,6 @@
-import { Api } from '../base/Api';
+import { Api, ApiListResponse } from '../base/Api';
 import { IOrder, IOrderResult, IProduct, IWebLarekAPI } from '../../types';
 
-// =======================
-// Реализация Не Закончена
-// =======================
 export class WebLarekAPI extends Api implements IWebLarekAPI {
 	readonly url: string;
 
@@ -13,14 +10,22 @@ export class WebLarekAPI extends Api implements IWebLarekAPI {
 	}
 
 	getProductList(): Promise<IProduct[]> {
-		return;
+		return this.get('/product').then((data: ApiListResponse<IProduct>) =>
+			data.items.map((item) => ({
+				...item,
+				image: this.url + item.image,
+			}))
+		);
 	}
 
 	getProductItem(id: string): Promise<IProduct> {
-		return;
+		return this.get(`/product/${id}`).then((item: IProduct) => ({
+			...item,
+			image: this.url + item.image,
+		}));
 	}
 
 	orderProducts(order: IOrder): Promise<IOrderResult> {
-		return;
+		return this.post('/order', order).then((data: IOrderResult) => data);
 	}
 }

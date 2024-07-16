@@ -4,9 +4,6 @@ import { IEvents } from '../base/Events';
 import { ensureElement } from '../../utils/utils';
 import { ApplicationEvents } from '../base/ApplicationEvents';
 
-// =======================
-// Реализация Не Закончена
-// =======================
 export class Page extends Component<IPage> {
 	protected _counter: HTMLElement;
 	protected _catalog: HTMLElement;
@@ -27,14 +24,18 @@ export class Page extends Component<IPage> {
 	}
 
 	set counter(value: number) {
-		return;
+		this.setText(this._counter, String(value));
 	}
 
 	set catalog(items: HTMLElement[]) {
-		return;
+		this._catalog.replaceChildren(...items);
 	}
 
 	set locked(value: boolean) {
-		return;
+		if (value) {
+			this.toggleClass(this._wrapper, 'page__wrapper_locked', true);
+		} else {
+			this.toggleClass(this._wrapper, 'page__wrapper_locked', false);
+		}
 	}
 }

@@ -19,16 +19,16 @@ export class Api {
 		};
 	}
 
-	protected _request(endPoint: string, options: RequestInit) {
-		return fetch(this.baseUrl + endPoint, options).then(this.handleResponse);
-	}
-
 	protected handleResponse(response: Response): Promise<object> {
 		if (response.ok) return response.json();
 		else
 			return response
 				.json()
 				.then((data) => Promise.reject(data.error ?? response.statusText));
+	}
+
+	protected _request(endPoint: string, options: RequestInit) {
+		return fetch(this.baseUrl + endPoint, options).then(this.handleResponse);
 	}
 
 	get(uri: string) {

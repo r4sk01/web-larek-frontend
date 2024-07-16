@@ -2,9 +2,6 @@ import { Form } from './Form';
 import { IOrderForm } from '../../types';
 import { IEvents } from '../base/Events';
 
-// =======================
-// Реализация Не Закончена
-// =======================
 export class ContactsForm extends Form<IOrderForm> {
 	protected _phone: HTMLInputElement;
 	protected _email: HTMLInputElement;
@@ -17,10 +14,10 @@ export class ContactsForm extends Form<IOrderForm> {
 	}
 
 	set phone(value: string) {
-		return;
+		this._phone.value = value;
 	}
 
 	set email(value: string) {
-		return;
+		this._email.value = value;
 	}
 }

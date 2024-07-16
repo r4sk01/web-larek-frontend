@@ -36,7 +36,7 @@ export interface ISuccessActions {
 	onClick: () => void;
 }
 
-// export type PaymentMethod = 'cash' | 'card';
+export type PaymentMethod = 'cash' | 'card';
 
 export interface IOrderAddress {
 	address: string;

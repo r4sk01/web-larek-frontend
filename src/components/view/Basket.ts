@@ -1,12 +1,9 @@
-import { Component } from '../base/Component';
-import { IBasket } from '../../types';
-import { EventEmitter } from '../base/Events';
-import { ensureElement } from '../../utils/utils';
 import { ApplicationEvents } from '../base/ApplicationEvents';
+import { Component } from '../base/Component';
+import { createElement, ensureElement } from '../../utils/utils';
+import { EventEmitter } from '../base/Events';
+import { IBasket } from '../../types';
 
-// =======================
-// Реализация Не Закончена
-// =======================
 export class Basket extends Component<IBasket> {
 	protected _list: HTMLElement;
 	protected _total: HTMLElement;
@@ -29,10 +26,20 @@ export class Basket extends Component<IBasket> {
 	}
 
 	set items(items: HTMLElement[]) {
-		return;
+		if (items.length) {
+			this._list.replaceChildren(...items);
+			this.setDisabled(this._button, false);
+		} else {
+			this._list.replaceChildren(
+				createElement<HTMLParagraphElement>('p', {
+					textContent: 'Корзина пуста',
+				})
+			);
+			this.setDisabled(this._button, true);
+		}
 	}
 
 	set total(price: number) {
-		return;
+		this.setText(this._total, `${price.toString()} синапсов`);
 	}
 }

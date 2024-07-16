@@ -3,9 +3,6 @@ import { IOrderForm } from '../../types';
 import { IEvents } from '../base/Events';
 import { ensureAllElements } from '../../utils/utils';
 
-// =======================
-// Реализация Не Закончена
-// =======================
 export class OrderForm extends Form<IOrderForm> {
 	protected _address: HTMLInputElement;
 	protected _buttons: HTMLButtonElement[];
@@ -27,10 +24,13 @@ export class OrderForm extends Form<IOrderForm> {
 	}
 
 	set class(name: string) {
-		return;
+		this._buttons.forEach((button) => {
+			this.toggleClass(button, 'button_alt-active', button.name === name);
+		});
+		this.onInputChange('payment', name);
 	}
 
 	set address(value: string) {
-		return;
+		this._address.value = value;
 	}
 }

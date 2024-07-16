@@ -1,11 +1,12 @@
 import { Model } from '../base/Model';
 import {
-	IAppState,
-	IProduct,
-	IOrder,
 	FormErrors,
+	IAppState,
+	IOrder,
 	IOrderAddress,
 	IOrderContacts,
+	IProduct,
+	PaymentMethod,
 } from '../../types';
 import { ApplicationEvents } from '../base/ApplicationEvents';
 
@@ -69,6 +70,26 @@ export class AppState extends Model<IAppState> {
 	setOrder() {
 		this.order.items = this.getBasketItems().map((product) => product.id);
 		this.order.total = this.getTotal();
+	}
+
+	setPayment(itemPayment: PaymentMethod) {
+		this.order.payment = itemPayment;
+		this.validateOrderPaymentMethod();
+	}
+
+	setAddress(itemAddress: string) {
+		this.order.address = itemAddress;
+		this.validateOrderPaymentMethod();
+	}
+
+	setEmail(itemEmail: string): void {
+		this.order.email = itemEmail;
+		this.validateOrderContacts();
+	}
+
+	setPhone(itemPhone: string): void {
+		this.order.phone = itemPhone;
+		this.validateOrderContacts();
 	}
 
 	validateOrderPaymentMethod() {

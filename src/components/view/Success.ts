@@ -2,9 +2,6 @@ import { Component } from '../base/Component';
 import { ISuccess, ISuccessActions } from '../../types';
 import { ensureElement } from '../../utils/utils';
 
-// =======================
-// Реализация Не Закончена
-// =======================
 export class Success extends Component<ISuccess> {
 	protected _close: HTMLButtonElement;
 	protected _total: HTMLElement;
@@ -27,6 +24,6 @@ export class Success extends Component<ISuccess> {
 	}
 
 	set total(price: number) {
-		return;
+		this.setText(this._total, `Списано ${price.toString()} синапсов`);
 	}
 }

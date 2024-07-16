@@ -1,10 +1,8 @@
 import { Component } from '../base/Component';
-import { ICard, IProductActions } from '../../types';
 import { ensureElement } from '../../utils/utils';
+import { ICard, IProductActions } from '../../types';
+import { categorySettings } from '../../utils/categorySettings';
 
-// =======================
-// Реализация Не Закончена
-// =======================
 export class Card extends Component<ICard> {
 	protected _title: HTMLElement;
 	protected _image?: HTMLImageElement;
@@ -37,50 +35,61 @@ export class Card extends Component<ICard> {
 	}
 
 	set id(value: string) {
-		return;
+		this.container.dataset.id = value;
 	}
 
 	get id(): string {
-		return;
+		return this.container.dataset.id || '';
 	}
 
 	set title(value: string) {
-		return;
+		this.setText(this._title, value);
 	}
 
 	get title(): string {
-		return;
+		return this._title.textContent || '';
 	}
 
 	set image(value: string) {
-		return;
+		this.setImage(this._image, value, this.title);
 	}
 
 	set description(value: string) {
-		return;
+		this.setText(this._description, value);
 	}
 
 	set price(value: number) {
-		return;
+		if (value === null) {
+			this.setText(this._price, 'Бесценно');
+			this.toggleButton(true);
+			this.button = 'Нельзя купить';
+		} else {
+			this.setText(this._price, `${value} синапсов`);
+			this.toggleButton(false);
+		}
 	}
 
 	get price(): number | null {
-		return;
+		return Number(this._price.textContent);
 	}
 
 	set category(value: string) {
-		return;
+		this.setText(this._category, value);
+		this.toggleClass(
+			this._category,
+			`card__category_${categorySettings[value]}`
+		);
 	}
 
 	get category(): string {
-		return;
+		return this._category.textContent || '';
 	}
 
 	set button(value: string) {
-		return;
+		this.setText(this._button, value);
 	}
 
-	toggleButton(state: boolean): void {
-		return;
+	toggleButton(state: boolean) {
+		this.setDisabled(this._button, state);
 	}
 }

@@ -3,9 +3,6 @@ import { IFormState } from '../../types';
 import { IEvents } from '../base/Events';
 import { ensureElement } from '../../utils/utils';
 
-// =======================
-// Реализация Не Закончена
-// =======================
 export class Form<T> extends Component<IFormState> {
 	protected _submit: HTMLButtonElement;
 	protected _errors: HTMLElement;
@@ -32,20 +29,25 @@ export class Form<T> extends Component<IFormState> {
 		});
 	}
 
-	protected onInputChange(field: keyof T, value: string): void {
-		return;
+	protected onInputChange(field: keyof T, value: string) {
+		this.events.emit(`${this.container.name}.${String(field)}:change`, {
+			field,
+			value,
+		});
 	}
 
 	set valid(value: boolean) {
-		return;
+		this.setDisabled(this._submit, !value);
 	}
 
 	set errors(value: string) {
-		return;
+		this.setText(this._errors, value);
 	}
 
 	render(state: Partial<T> & IFormState) {
-		// To Be done
+		const { valid, errors, ...inputs } = state;
+		super.render({ valid, errors });
+		Object.assign(this, inputs);
 		return this.container;
 	}
 }
