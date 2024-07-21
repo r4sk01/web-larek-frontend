@@ -1,3 +1,23 @@
+export enum ApplicationEvents {
+	AddressErrorsChange = 'addressErrors:change',
+	BasketAdd = 'basket:add',
+	BasketChange = 'basket:change',
+	BasketOpen = 'basket:open',
+	BasketRemove = 'basket:remove',
+	CardBasket = 'card:basket',
+	CardSelect = 'card:select',
+	ContactsErrorsChange = 'contactsErrors:change',
+	ContactsSubmit = 'contacts:submit',
+	ItemsChange = 'items:change',
+	ModalOpen = 'modal:open',
+	ModalClose = 'modal:close',
+	OrderReady = 'order:ready',
+	OrderOpen = 'order:open',
+	OrderSubmit = 'order:submit',
+	OrderSuccess = 'order:success',
+	PreviewChange = 'preview:change',
+}
+
 export interface IProduct {
 	id: string;
 	title: string;
@@ -9,6 +29,7 @@ export interface IProduct {
 
 export interface ICard extends IProduct {
 	buttonTitle?: string;
+	cardIndex?: string;
 }
 
 export interface IBasket {

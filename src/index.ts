@@ -11,7 +11,7 @@ import { OrderForm } from './components/view/OrderForm';
 import { ContactsForm } from './components/view/ContactForm';
 import { Success } from './components/view/Success';
 import { Card } from './components/view/Card';
-import { ApplicationEvents } from './components/base/ApplicationEvents';
+import { ApplicationEvents } from './types';
 import { IOrderAddress, IOrderContacts, IProduct } from './types';
 
 const cardCatalogTmp = ensureElement<HTMLTemplateElement>('#card-catalog');
@@ -37,7 +37,7 @@ const success = new Success(cloneTemplate(successTmp), {
 // @todo: Catalog Elements changed
 events.on<CatalogChangeEvent>(ApplicationEvents.ItemsChange, () => {
 	page.catalog = appState.catalog.map((item) => {
-		const card = new Card('card', cloneTemplate(cardCatalogTmp), {
+		const card = new Card(cloneTemplate(cardCatalogTmp), {
 			onClick: () => events.emit(ApplicationEvents.CardSelect, item),
 		});
 		return card.render({
@@ -59,7 +59,7 @@ events.on(ApplicationEvents.CardSelect, (item: IProduct) => {
 
 // @todo: Change to Chosen Item
 events.on(ApplicationEvents.PreviewChange, (item: IProduct) => {
-	const card = new Card('card', cloneTemplate(cardPreviewTmp), {
+	const card = new Card(cloneTemplate(cardPreviewTmp), {
 		onClick: () => {
 			events.emit(ApplicationEvents.CardBasket, item);
 			card.button = appState.isProductInBasket(item)
@@ -121,13 +121,14 @@ events.on(ApplicationEvents.BasketOpen, () => {
 
 // @todo: Basket Update
 events.on(ApplicationEvents.BasketChange, () => {
-	basket.items = appState.basket.map((item) => {
-		const card = new Card('card', cloneTemplate(cardBasketTmp), {
+	basket.items = appState.basket.map((item, cardIndex) => {
+		const card = new Card(cloneTemplate(cardBasketTmp), {
 			onClick: () => {
 				events.emit(ApplicationEvents.BasketRemove, item);
 			},
 		});
 		return card.render({
+			cardIndex: (cardIndex + 1).toString(),
 			title: item.title,
 			price: item.price,
 		});

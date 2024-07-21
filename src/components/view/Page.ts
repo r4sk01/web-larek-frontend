@@ -1,8 +1,7 @@
 import { Component } from '../base/Component';
-import { IPage } from '../../types';
+import { ApplicationEvents, IPage } from '../../types';
 import { IEvents } from '../base/Events';
 import { ensureElement } from '../../utils/utils';
-import { ApplicationEvents } from '../base/ApplicationEvents';
 
 export class Page extends Component<IPage> {
 	protected _counter: HTMLElement;
@@ -32,10 +31,6 @@ export class Page extends Component<IPage> {
 	}
 
 	set locked(value: boolean) {
-		if (value) {
-			this.toggleClass(this._wrapper, 'page__wrapper_locked', true);
-		} else {
-			this.toggleClass(this._wrapper, 'page__wrapper_locked', false);
-		}
+		this.toggleClass(this._wrapper, 'page__wrapper_locked', value);
 	}
 }

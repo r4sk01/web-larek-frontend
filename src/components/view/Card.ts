@@ -10,20 +10,18 @@ export class Card extends Component<ICard> {
 	protected _button?: HTMLButtonElement;
 	protected _price: HTMLElement;
 	protected _category?: HTMLElement;
+	protected _cardIndex?: HTMLElement;
 
-	constructor(
-		protected blockName: string,
-		container: HTMLElement,
-		actions?: IProductActions
-	) {
+	constructor(container: HTMLElement, actions?: IProductActions) {
 		super(container);
 
-		this._title = ensureElement<HTMLElement>(`.${blockName}__title`, container);
-		this._image = container.querySelector(`.${blockName}__image`);
-		this._button = container.querySelector(`.${blockName}__button`);
-		this._description = container.querySelector(`.${blockName}__text`);
-		this._price = ensureElement<HTMLElement>(`.${blockName}__price`, container);
-		this._category = container.querySelector(`.${blockName}__category`);
+		this._title = ensureElement<HTMLElement>('.card__title', container);
+		this._image = container.querySelector('.card__image');
+		this._button = container.querySelector('.card__button');
+		this._description = container.querySelector('.card__text');
+		this._price = ensureElement<HTMLElement>('.card__price', container);
+		this._category = container.querySelector('.card__category');
+		this._cardIndex = container.querySelector('.basket__item-index');
 
 		if (actions?.onClick) {
 			if (this._button) {
@@ -83,6 +81,14 @@ export class Card extends Component<ICard> {
 
 	get category(): string {
 		return this._category.textContent || '';
+	}
+
+	set cardIndex(value: string) {
+		this._cardIndex.textContent = value;
+	}
+
+	get cardIndex(): string {
+		return this._cardIndex.textContent || '';
 	}
 
 	set button(value: string) {

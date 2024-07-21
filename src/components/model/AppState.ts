@@ -1,5 +1,6 @@
 import { Model } from '../base/Model';
 import {
+	ApplicationEvents,
 	FormErrors,
 	IAppState,
 	IOrder,
@@ -8,7 +9,6 @@ import {
 	IProduct,
 	PaymentMethod,
 } from '../../types';
-import { ApplicationEvents } from '../base/ApplicationEvents';
 
 export type CatalogChangeEvent = {
 	catalog: IProduct[];
